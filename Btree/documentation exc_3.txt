@@ -1,0 +1,78 @@
+
+Choose one of the following
+1: add a new lending
+2: return an item
+3: print all lendings
+4: print all lendings of a date
+5: print all lending according name of brrower
+6: exit:
+1
+Enter lending data
+enter id name date item 1
+yehuda
+19/09/12
+1
+1
+Enter lending data
+enter id name date item 2
+simcha
+19/08/01
+2
+1
+Enter lending data
+enter id name date item 3
+dani
+18/03/23
+4
+1
+Enter lending data
+enter id name date item 5
+zeev
+19/04
+6
+3
+
+Lending details: id: 3 name: dani date: 18/03/23 item: 4
+
+Lending details: id: 5 name: zeev date: 19/04 item: 6
+
+Lending details: id: 2 name: simcha date: 19/08/01 item: 2
+
+Lending details: id: 1 name: yehuda date: 19/09/12 item: 1
+1
+Enter lending data
+enter id name date item 2
+simcha
+19/01/01
+7
+5
+Enter the required name
+simcha
+
+Lending details: id: 2 name: simcha date: 19/01/01 item: 7
+
+Lending details: id: 2 name: simcha date: 19/08/01 item: 2
+2
+Enter lending data
+enter id name date item 5
+zeev
+19/04
+6
+3
+
+Lending details: id: 3 name: dani date: 18/03/23 item: 4
+
+Lending details: id: 2 name: simcha date: 19/01/01 item: 7
+
+Lending details: id: 2 name: simcha date: 19/08/01 item: 2
+
+Lending details: id: 1 name: yehuda date: 19/09/12 item: 1
+4
+Enter the required date
+18/03/23
+
+Lending details: id: 3 name: dani date: 18/03/23 item: 4
+6
+bye
+
+Press any key to close this window . . .
