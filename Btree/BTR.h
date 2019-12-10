@@ -438,6 +438,7 @@ void BNode<T>::deleteVal(T x, bool searchForSuccessor, T& successorFound, bool& 
 //*********************************************************************************************
 
 
+
 template <typename T>
 class BTree
 	//BTree with max degree M
@@ -452,23 +453,56 @@ public:
 	void deleteTree() { if (root)deleteSubTree(root); }
 	void printSubTree(BNode<T>* t);
 	void printTree() { printSubTree(root); }
-	void printAllKeys(std::function<bool(const T&)> predicate) { printAllKeys(root, predicate); }
-	void printAllKeys(BNode<T>* p, std::function<bool(const T&)> predicate);
+	/*void printAllKeys(std::function<bool(const T&)> predicate) { printAllKeys(root, predicate); }
+	void printAllKeys(BNode<T>* p, std::function<bool(const T&)> predicate);*/
 	T* search(T x) { return search(root, x); }
 	T* search(BNode<T>* p, T x);
-	void printBetween(const T& lhs, const T& rhs);
-	void printAccName(string str);
+	void printBetween(BNode<T>* p, const T& lhs, const T& rhs);
+	void printBetween(const T& lhs, const T& rhs) { printBetween(root, lhs, rhs); }
+	void printAccName(BNode<T>* p, string str);
+	void printAccName(string str) { printAccName(root, str); }
 };
+
 template <typename T>
-void BTree<T>::printAccName(string str)
+void BTree<T>::printAccName(BNode<T>* p, string str)
 {
-	printAllKeys([&](const T& current)->bool { return current._client == str; });
+	// printAllKeys([&](const T& current)->bool { return current._client == str; });
+	if (p->Son[0] == NULL)// if its a leaf
+	{
+		for (int i = 0; i < p->nkeys; ++i)
+			if (p->Key[i]._client == str)
+				cout << p->Key[i];
+		return;
+	}
+	//else
+	for (int i = 0; i < p->nsons; ++i)
+	{
+		printAccName(p->Son[i],str);
+		if (i < p->nsons - 1)
+			if (p->Key[i]._client == str)
+				cout << p->Key[i];
+	}
 }
 
 template <typename T>
-void BTree<T>::printBetween(const T& lhs, const T& rhs)
+void BTree<T>::printBetween(BNode<T>* p, const T& lhs, const T& rhs)
 {
-	printAllKeys([&](const T& current)->bool { return current > lhs&& current < rhs; });
+	//printAllKeys([&](const T& current)->bool { return current > lhs&& current < rhs; });
+	if (p->Son[0] == NULL)// if its a leaf
+	{
+		for (int i = 0; i < p->nkeys; ++i)
+			if (p->Key[i] >= lhs&& p->Key[i] <= rhs)
+				cout << p->Key[i];
+		return;
+	}
+	//else
+	for (int i = 0; i < p->nsons; ++i)
+	{
+		printBetween(p->Son[i],lhs,rhs);
+		if (i < p->nsons - 1)
+			if (p->Key[i] >= lhs&& p->Key[i] <= rhs)
+				cout << p->Key[i];
+	}
 }
 
 template <typename T>
@@ -505,25 +539,25 @@ T* BTree<T>::search(BNode<T>* p, T x)
 	return tmp;
 }
 
-template <typename T>
-void BTree<T>::printAllKeys(BNode<T>* p, std::function<bool(const T&)> predicate)
-{
-	if (p->Son[0] == NULL)// if its a leaf
-	{
-		for (int i = 0; i < p->nkeys; ++i)
-			if (predicate(p->Key[i]))
-				cout << p->Key[i];
-		return;
-	}
-	//else
-	for (int i = 0; i < p->nsons; ++i)
-	{
-		printAllKeys(p->Son[i], predicate);
-		if (i < p->nsons - 1)
-			if (predicate(p->Key[i]))
-				cout << p->Key[i];
-	}
-}
+//template <typename T>
+//void BTree<T>::printAllKeys(BNode<T>* p, std::function<bool(const T&)> predicate)
+//{
+//	if (p->Son[0] == NULL)// if its a leaf
+//	{
+//		for (int i = 0; i < p->nkeys; ++i)
+//			if (predicate(p->Key[i]))
+//				cout << p->Key[i];
+//		return;
+//	}
+//	//else
+//	for (int i = 0; i < p->nsons; ++i)
+//	{
+//		printAllKeys(p->Son[i], predicate);
+//		if (i < p->nsons - 1)
+//			if (predicate(p->Key[i]))
+//				cout << p->Key[i];
+//	}
+//}
 
 template <typename T>
 void BTree<T>::deleteSubTree(BNode<T>* t)
@@ -599,3 +633,7 @@ void BTree<T>::deleteVal(T x)
 		}
 	//otherwise, the root is allowed to have less than M/2 nodes.
 }
+
+
+
+//

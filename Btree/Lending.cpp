@@ -18,9 +18,9 @@ bool Lending::operator >= (const Lending& rhs) const
 {
 	if (_date >= rhs._date)
 		if (_date == rhs._date)
-			if (_id >= rhs._id)
+			if (_code >= rhs._code)
 				if (_id == rhs._id)
-					if (_code >= rhs._code)
+					if (_id == rhs._id)
 						return true;
 					else
 						return false;
@@ -43,9 +43,9 @@ bool Lending::operator <= (const Lending& rhs) const
 {
 	if (_date <= rhs._date)
 		if (_date == rhs._date)
-			if (_id <= rhs._id)
+			if (_code <= rhs._code)
 				if (_id == rhs._id)
-					if (_code <= rhs._code)
+					if (_id == rhs._id)
 						return true;
 					else
 						return false;
